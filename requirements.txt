@@ -8,3 +8,4 @@ joblib
 pillow
 scikit-learn
 python-multipart
+xgboost
