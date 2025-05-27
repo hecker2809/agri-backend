@@ -1,0 +1,20 @@
+# Ignore virtual environment
+venv/
+
+# Ignore Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore temporary/test image files
+*.jpg
+*.jpeg
+*.png
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore logs or local settings
+*.log
+.env
