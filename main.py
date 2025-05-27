@@ -9,6 +9,8 @@ from tensorflow.keras.models import load_model
 from PIL import Image
 import io
 import logging
+import os
+import uvicorn
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -19,11 +21,12 @@ app = FastAPI()
 # Enable CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:8080"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # ========== Load Models ==========
 try:
@@ -157,3 +160,6 @@ async def predict_leaf_disease(file: UploadFile = File(...)):
         logger.error(f"Image prediction error: {e}")
         raise HTTPException(status_code=500, detail="Image processing failed.")
 
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))  # fallback for local
+    uvicorn.run(app, host="0.0.0.0", port=port)
